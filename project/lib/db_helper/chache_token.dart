@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:project/utils/handle_push_view.dart';
+import 'package:project/view/login_view.dart';
 
 class CacheHelper {
   final FlutterSecureStorage _flutterSecureStorage = const FlutterSecureStorage();
@@ -15,7 +18,9 @@ class CacheHelper {
     return tokenUser ?? noToken;
   }
 
-  void deleteAll() {
-    _flutterSecureStorage.deleteAll();
+  void deleteAll(BuildContext context) {
+    _flutterSecureStorage.deleteAll().then((value){
+      pushReplace(context, const LoginView());
+    });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/data/response/api_response.dart';
 import 'package:project/data/response/status.dart';
-import 'package:project/db_helper/cache_profile.dart';
+import 'package:project/db_helper/chache_token.dart';
 import 'package:project/model/profile_model.dart';
 import 'package:project/view_model/profile_view_model.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +14,8 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  final CacheProfile _cacheProfile = CacheProfile();
   ProfileNotifier profileNotifier = ProfileNotifier();
+  final CacheHelper _cacheHelper = CacheHelper();
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -34,7 +34,7 @@ class _ProfileViewState extends State<ProfileView> {
         actions: [
           IconButton(
               onPressed: () {
-                _cacheProfile.deleteAll();
+                _cacheHelper.deleteAll(context);
                 context.read<ProfileNotifier>().logoutViewModel(context);
               },
               icon: const Icon(Icons.logout_outlined))
