@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/db_helper/chache_token.dart';
+import 'package:project/utils/handle_push_view.dart';
 import 'package:project/view/index_view.dart';
 
 import 'login_view.dart';
@@ -24,13 +25,11 @@ class _SplashViewState extends State<SplashView> {
     debugPrint("Token: $token");
     if (token == cacheHelper.noToken) {
       Future.delayed(const Duration(milliseconds: 600), () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LoginView()));
+        pushReplace(context, const LoginView());
       });
     } else {
       Future.delayed(const Duration(milliseconds: 600), () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const IndexView()));
+        pushReplace(context, const IndexView());
       });
     }
   }
